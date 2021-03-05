@@ -15,6 +15,18 @@
 */
 
 //CODE HERE
+class Character {
+  constructor(name, type) {
+      this.name = name
+      this.type = type
+    }
+  getInfo() {
+    return `this is a ${this.type} character named ${this.name}`
+}
+}
+const Carlos = new Character('Carlos','human')
+console.log(Carlos.getInfo())
+
 
 //////////////////PROBLEM 2////////////////////
 
@@ -23,7 +35,8 @@
   Each NPC has all of the same properties as a character with the following additional properties:
     - location
     - phrase
-  Each NPC has the following additional methods:
+  Each NPC has the follow
+  ing additional methods:
     - dialogue
       - This returns a string of 'NAME: PHRASE'
       - Example: 'Porter: What brings a pirate like yourself to this peaceful township?'
@@ -33,6 +46,17 @@
 */
 
 //CODE HERE
+class NPC extends Character {
+  constructor(name, type, location, phrase) {
+    super(name, type, location, phrase);
+    this.location = location
+    this.phrase = phrase
+  }
+
+  dialogue() {
+      return `${this.name} : ${this.phrase}`
+    }
+}
 
 /*
     Create an NPC named Ralph who is a human located in Niceland. His phrase should be `I'm gonna wreck it!`. 
@@ -40,6 +64,7 @@
 */
 
 //CODE HERE
+const Ralph = new NPC('Ralph', 'human', 'Niceland', `I'm gonna wreck it!.`)
 
 /*
     Next you're going to create three variables to store information about Ralph.
@@ -49,6 +74,10 @@
 */
 
 //CODE HERE
+const ralphsInfo = Ralph.getInfo()
+const ralphsDialogue = Ralph.dialogue()
+const ralphsLocation = Ralph.location
+console.timeLog(ralphsLocation)
 
 //////////////////PROBLEM 3////////////////////
 
@@ -74,7 +103,25 @@
 */
 
 //CODE HERE
-
+class Player extends Character {
+  constructor(name, type, healthLevel, attackLevel) {
+    super(name, type, healthLevel, attackLevel);
+    this.healthLevel = healthLevel
+    this.attackLevel = attackLevel
+  }
+  defend(attackLevel) {
+    this.healthLevel = (this.healthLevel - attackLevel)
+    if (this.healthLevel > 0) {
+      return this.attackStrength = attackLevel, 
+      this.remainingHealth = (this.healthLevel),
+      `${this.name} is still in the fight!`
+    } else  {
+      return `${this.name} has been defeated`
+    }
+  }
+}
+const Lacey = new Player('Lacey', 'human', 50, 40)
+console.log(Lacey)
 /*
     Next, we'll create two Players.
     Store the first in a variable called aang, his name should be 'Aang' 
@@ -84,7 +131,8 @@
 */
 
 //CODE HERE
-
+const aang = new Player('Aang', 'Airbender', 100, 100)
+const ozai = new Player('Ozai', 'Firebender', 100, 0)
 /*
     Let's see how a fight between these two would go. 
     Create a variable called 'battle' whose value is Ozai's 
@@ -93,7 +141,8 @@
 */
 
 //CODE HERE
-
+let battle = ozai.defend(100)
+console.log(battle)
 //////////////////PROBLEM 4////////////////////
 
 /*
@@ -111,6 +160,18 @@
 */
 
 //CODE HERE
+class Hero extends Player {
+  constructor(name, type, healthLevel, attackLevel, superPowers) {
+    super(name, type, healthLevel, attackLevel, superPowers);
+    this.superPowers = []
+  }
+addSuperPower(power) {
+  return this.superPowers.push(power)
+}
+useSuperPower(num) {
+  return `${this.name} used  ${this.superPowers[num]} !`
+}
+}
 
 /*
   Create a hero named 'Fire Spitter' whose type is 'dragon'. 
@@ -122,3 +183,10 @@
 */
 
 //CODE HERE
+const fireSpitter = new Hero('Fire Spitter', 'dragon', 5000, 5000, 0)
+fireSpitter.addSuperPower('spitting fire')
+fireSpitter.addSuperPower('flight')
+fireSpitter.addSuperPower('stenght')
+console.log(fireSpitter.superPowers)
+let fireSpitterAttack = fireSpitter.useSuperPower(0)
+console.log(fireSpitterAttack)
